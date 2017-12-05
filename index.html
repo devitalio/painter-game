@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Painter</title>
+    <link rel="stylesheet" type="text/css" href="styles/game-layout.css"/>
+    <script src="lib/LAB.min.js"></script>
+</head>
+<body>
+    <div id="gameArea">
+        <canvas id="myCanvas" width="800" height="480"></canvas>
+    </div>
+    <script>
+        $LAB.script("./game/canvas.js").wait()
+            .script("./game/mouse.js").wait()
+            .script("./game/keyboard.js").wait()
+            .script("app.js").wait(function () {
+            Game.start("myCanvas");
+        });
+    </script>
+</body>
+</html>
