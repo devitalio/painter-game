@@ -21,7 +21,7 @@ Game.loadAssets = function () {
 Game.initialize = function () {
 
     console.log("Creating game world");
-    cannon.initialize();
+    cannon.initialize(); //this also could have been moved to painterGameWorld.js
     ball.initialize();
     Game.gameWorld = painterGameWorld;
 };

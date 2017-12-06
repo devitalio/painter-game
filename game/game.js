@@ -12,9 +12,10 @@ var Game = {
     gameWorld: undefined
 };
 
-Game.start = function (canvas, canvasWidth, canvasHeight) {
+Game.start = function (canvas) {
     Canvas2D.initialize(canvas);
-    Game.size = { width: canvasWidth, height: canvasHeight }; //to refactor to use canvas2D
+    console.log('canvas width ' + Canvas2D.canvas.width + ' and canvas height ' + Canvas2D.canvas.height);
+    Game.size = { width: Canvas2D.canvas.width, height: Canvas2D.canvas.height };
     Keyboard.initialize();
     Mouse.initialize();
     Game.loadAssets();

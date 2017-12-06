@@ -15,7 +15,7 @@ painterGameWorld.update = function (delta) {
 };
 
 painterGameWorld.draw = function () {
-    Canvas2D.drawImage(sprites.background, { x: 0, y: 0 }, 0, { x: 0, y: 0 }); //to refactor into background object
+    Canvas2D.drawImage(sprites.background, { x: 0, y: 0 }, 0, { x: 0, y: 0 }); //probably should leave it here as background doesn't really changes
     ball.draw();
     cannon.draw();
 };
