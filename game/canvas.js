@@ -17,3 +17,8 @@ Canvas2D.drawImage = function (sprite, position, rotation, origin) {
         -origin.x, -origin.y, sprite.width, sprite.height);
     this.canvasContext.restore();
 }
+
+Canvas2D.initialize = function(canvas) {
+    Canvas2D.canvas = document.getElementById(canvas);
+    Canvas2D.canvasContext = Canvas2D.canvas.getContext('2d');
+}

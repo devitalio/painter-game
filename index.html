@@ -13,8 +13,12 @@
         $LAB.script("./game/canvas.js").wait()
             .script("./game/mouse.js").wait()
             .script("./game/keyboard.js").wait()
-            .script("app.js").wait(function () {
-            Game.start("myCanvas");
+            .script("./game/cannon.js").wait()
+            .script("./game/ball.js").wait()
+            .script("./game/game.js").wait()
+            .script("app.js").wait()
+            .script("./game/painterGameWorld.js").wait(function () {
+                Game.start("myCanvas", 800, 480);
         });
     </script>
 </body>

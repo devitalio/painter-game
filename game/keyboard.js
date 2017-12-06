@@ -1,9 +1,16 @@
 "use strict";
 
-var Keyboard = {
-    keyDown: undefined,
-    handleKeyDown: function(evt) {
-        Keyboard.keydown = evt.key;
-        //console.log(Keyboard.keydown);
-    }
-}
+var Keyboard = { key: -1 };
+
+Keyboard.handleKeyDown = function handleKeyDown(evt) {
+    Keyboard.key = evt.key;
+};
+
+Keyboard.handleKeyUp = function (evt) {
+    Keyboard.key = -1;
+};
+
+Keyboard.initialize = function () {
+    document.onkeydown = Keyboard.handleKeyDown;
+    document.onkeyup = Keyboard.handleKeyUp;
+};
