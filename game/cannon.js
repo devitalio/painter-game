@@ -30,3 +30,9 @@ cannon.handleInput = function (delta) {
     if (Keyboard.key === "b")
         cannon.currentColor = sprites.cannon_blue;
 };
+
+cannon.ballPosition = function () {
+    var opposite = Math.sin(cannon.rotation) * sprites.cannon_barrel.width * 0.6;
+    var adjacent = Math.cos(cannon.rotation) * sprites.cannon_barrel.width * 0.6;
+    return { x: cannon.position.x + adjacent, y: cannon.position.y + opposite };
+};

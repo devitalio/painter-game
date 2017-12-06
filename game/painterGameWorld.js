@@ -26,5 +26,5 @@ painterGameWorld.reset = function () {
 };
 
 painterGameWorld.isOutsideWorld = function (position) {
-    return position.x < 0 || position.x > Game.size.x || position.y > Game.size.y;
+    return position.x < 0 || position.x > Game.size.width || position.y > Game.size.height;
 };
