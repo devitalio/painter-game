@@ -6,23 +6,25 @@ window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequ
         window.setTimeout(callback, 1000 / 60);
     };
 
+function Game_Singleton() {
+    this.size = undefined,
+    this.spritesStillLoading = 0;
+    this.gameWorld = undefined;
+}
 
-var Game = {
-    spritesStillLoading: 0,
-    gameWorld: undefined
-};
 
-Game.start = function (canvas) {
+
+Game_Singleton.prototype.start = function (canvas) {
     Canvas2D.initialize(canvas);
     console.log('canvas width ' + Canvas2D.canvas.width + ' and canvas height ' + Canvas2D.canvas.height);
-    Game.size = { width: Canvas2D.canvas.width, height: Canvas2D.canvas.height };
+    this.size = { width: Canvas2D.canvas.width, height: Canvas2D.canvas.height };
     Keyboard.initialize();
     Mouse.initialize();
-    Game.loadAssets();
-    Game.assetLoadingLoop();
+    this.loadAssets();
+    this.assetLoadingLoop();
 };
 
-Game.loadSprite = function (path) {
+Game_Singleton.prototype.loadSprite = function (path) {
     var img = new Image();
     img.src = path;
     Game.spritesStillLoading += 1;
@@ -31,11 +33,13 @@ Game.loadSprite = function (path) {
 }
 
 //overload in a specific to game method in app.js
-Game.loadAssets = function () { };
+Game_Singleton.prototype.loadAssets = function () { };
 
-Game.initialize = function () { };
+Game_Singleton.prototype.initialize = function() {
+    Game.gameWorld = new PainterGameWorld();
+};
 
-Game.assetLoadingLoop = function () {
+Game_Singleton.prototype.assetLoadingLoop = function () {
     if (Game.spritesStillLoading > 0)
         requestAnimationFrame(Game.assetLoadingLoop);
     else {
@@ -44,7 +48,7 @@ Game.assetLoadingLoop = function () {
     }
 }
 
-Game.mainLoop = function () {
+Game_Singleton.prototype.mainLoop = function () {
 
     var delta = 1 / 60; // wtf ?
 
@@ -56,3 +60,4 @@ Game.mainLoop = function () {
     requestAnimationFrame(Game.mainLoop);
 };
 
+var Game = new Game_Singleton();

@@ -2,29 +2,33 @@
 //dipatches actions to objects from game loop
 "use strict";
 
-var painterGameWorld = {};
-
-painterGameWorld.handleInput = function (delta) {
-    ball.handleInput(delta);
-    cannon.handleInput(delta);
+function PainterGameWorld ()
+{
+    this.cannon = new Cannon();
+    this.ball = new Ball();
 };
 
-painterGameWorld.update = function (delta) {
-    ball.update(delta);
-    cannon.update(delta);
+PainterGameWorld.prototype.handleInput = function (delta) {
+    this.ball.handleInput(delta);
+    this.cannon.handleInput(delta);
 };
 
-painterGameWorld.draw = function () {
+PainterGameWorld.prototype.update = function (delta) {
+    this.ball.update(delta);
+    this.cannon.update(delta);
+};
+
+PainterGameWorld.prototype.draw = function () {
     Canvas2D.drawImage(sprites.background, { x: 0, y: 0 }, 0, { x: 0, y: 0 }); //probably should leave it here as background doesn't really changes
-    ball.draw();
-    cannon.draw();
+    this.ball.draw();
+    this.cannon.draw();
 };
 
-painterGameWorld.reset = function () {
-    ball.reset();
-    cannon.reset();
+PainterGameWorld.prototype.reset = function () {
+    this.ball.reset();
+    this.cannon.reset();
 };
 
-painterGameWorld.isOutsideWorld = function (position) {
+PainterGameWorld.prototype.isOutsideWorld = function (position) {
     return position.x < 0 || position.x > Game.size.width || position.y > Game.size.height;
 };

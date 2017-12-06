@@ -18,14 +18,3 @@ Game.loadAssets = function () {
     sprites.ball_blue = loadSprite("spr_ball_blue.png");
 };
 
-Game.initialize = function () {
-
-    console.log("Creating game world");
-    cannon.initialize(); //this also could have been moved to painterGameWorld.js
-    ball.initialize();
-    Game.gameWorld = painterGameWorld;
-};
-
-
-
-
