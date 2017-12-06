@@ -32,7 +32,7 @@ cannon.handleInput = function (delta) {
 };
 
 cannon.ballPosition = function () {
-    var opposite = Math.sin(cannon.rotation) * sprites.cannon_barrel.width * 0.6;
-    var adjacent = Math.cos(cannon.rotation) * sprites.cannon_barrel.width * 0.6;
+    var opposite = Math.sin(cannon.rotation) * sprites.cannon_barrel.width * 0.8;
+    var adjacent = Math.cos(cannon.rotation) * sprites.cannon_barrel.width * 0.8;
     return { x: cannon.position.x + adjacent, y: cannon.position.y + opposite };
 };
