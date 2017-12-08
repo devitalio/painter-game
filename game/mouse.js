@@ -1,7 +1,7 @@
 "use strict";
 
 var Mouse = {
-    position: { x: 0, y: 0 },
+    position: new Vector2(),
     leftDown: false,
     leftPressed: false,
 };
@@ -26,7 +26,8 @@ Mouse.handelMouseDown = function (evt) {
 };
 
 Mouse.handleMouseMove = function (evt) {
-    Mouse.position = { x: evt.pageX, y: evt.pageY };
+    Mouse.position = new Vector2(evt.pageX, evt.pageY);
+    console.log(Mouse.position.toString());
 };
 
 Mouse.reset = function () {

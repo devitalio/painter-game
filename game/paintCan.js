@@ -1,9 +1,9 @@
 "use strict";
 
 function PaintCan (xposition) {
-    this.position = {x:xposition, y:-200};
-    this.velocity = { x: 0, y: 0 };
-    this.origin = { x: 0, y: 0 };
+    this.position = new Vector2(xposition, -200);
+    this.velocity = new Vector2();
+    this.origin = new Vector2();
     this.currentColor = sprites.can_red;
     this.minVelocity = 30;
     this.reset();
@@ -14,9 +14,7 @@ PaintCan.prototype.update = function(delta) {
         this.velocity = this.calculateRandomVelocity();
         this.currentColor = this.calculateRandomColor();
     }
-
-    this.position.x = this.position.x + this.velocity.x * delta;
-    this.position.y = this.position.y + this.velocity.y * delta;
+    this.position.addTo(this.velocity.multiply(delta));
 
     if (Game.gameWorld.isOutsideWorld(this.position)) {
         this.reset();
@@ -30,12 +28,12 @@ PaintCan.prototype.reset = function () {
 };
 
 PaintCan.prototype.moveToTop = function () {
-    this.position = { x: this.position.x, y: -200 };
-    this.velocity = { x: 0, y: 0 };
+    this.position = new Vector2(this.position.x, -200);
+    this.velocity = new Vector2();
 };
 
 PaintCan.prototype.calculateRandomVelocity = function () {
-    return { x: 0, y: Math.random() * 30 + this.minVelocity };
+    return new Vector2(0, Math.random() * 30 + this.minVelocity);
 };
 
 PaintCan.prototype.calculateRandomColor = function () {

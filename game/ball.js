@@ -1,33 +1,32 @@
 "use strict";
 
 function Ball () {
-    this.position = { x: 0, y: 0 };
-    this.velocity = { x: 0, y: 0 };
-    this.origin = { x: 0, y: 0 };
+    this.position = new Vector2();
+    this.velocity = new Vector2();
+    this.origin = new Vector2();
     this.currentColor = sprites.ball_red;
     this.isShooting = false;
-};
+}
 
 Ball.prototype.update = function(delta) {
     if (this.isShooting) {
-        this.velocity.x = this.velocity.x * 0.99;
-        this.velocity.y = this.velocity.y + 6;
-        this.position.x = this.position.x + this.velocity.x * delta;
-        this.position.y = this.position.y + this.velocity.y * delta;
+
+        this.velocity.x *= 0.99;
+        this.velocity.y += 6;
+        this.position.addTo(this.velocity.multiply(delta));
+
     } else {
 
-        if (Game.gameWorld.cannon.currentColor == sprites.cannon_red)
+        if (Game.gameWorld.cannon.currentColor == sprites.cannon_red) {
             this.currentColor = sprites.ball_red;
-        else if (Game.gameWorld.cannon.currentColor == sprites.cannon_blue) {
+        } else if (Game.gameWorld.cannon.currentColor == sprites.cannon_blue) {
             this.currentColor = sprites.ball_blue;
-        }
-        else {
+        } else {
             this.currentColor = sprites.ball_green;
         }
 
-        this.position = Game.gameWorld.cannon.ballPosition();
-        this.position.x = this.position.x - this.currentColor.width / 2;
-        this.position.y = this.position.y - this.currentColor.height / 2;
+        var center = new Vector2(this.currentColor.width / 2, this.currentColor.height / 2);
+        this.position = Game.gameWorld.cannon.ballPosition().substract(center);
     }
 
     if (Game.gameWorld.isOutsideWorld(this.position))
@@ -35,7 +34,7 @@ Ball.prototype.update = function(delta) {
 };
 
 Ball.prototype.reset = function() {
-    this.position = { x: 0, y: 0 };
+    this.position = new Vector2();
     this.isShooting = false;
 };
 
@@ -50,8 +49,8 @@ Ball.prototype.draw = function () {
 Ball.prototype.handleInput = function (delta) {
     if (Mouse.leftPressed && !this.isShooting) {
         this.isShooting = true;
-        this.velocity.x = Mouse.position.x - this.position.x * 1.3;
-        this.velocity.y = Mouse.position.y - this.position.y * 1.3;
-        console.log(this.velocity.x +' ' + this.velocity.y)
+        this.velocity = Mouse.position.substract(this.position.multiply(1.3));
+
+        console.log(this.velocity.toString());
     }
 };
