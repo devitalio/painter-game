@@ -1,9 +1,9 @@
 "use strict";
 
 function Ball () {
-    this.position = new Vector2();
-    this.velocity = new Vector2();
-    this.origin = new Vector2();
+    this.position = Vector2.zero;
+    this.velocity = Vector2.zero;
+    this.origin = Vector2.zero;
     this.currentColor = sprites.ball_red;
     this.isShooting = false;
 }
