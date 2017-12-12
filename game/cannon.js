@@ -84,7 +84,7 @@ Object.defineProperty(Cannon.prototype,"color",
                 return Color.green;
             }
         },
-        set: function() {
+        set: function(value) {
             if (value === Color.red) {
                 this.currentColor = sprites.cannon_red
             }
