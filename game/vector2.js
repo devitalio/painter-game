@@ -104,3 +104,9 @@ Vector2.prototype.normalize = function () {
     this.divideBy(length);
 };
 
+Object.defineProperty(Vector2.prototype, "zero",
+{
+    get: function() {
+        return new Vector2();
+    }
+});
