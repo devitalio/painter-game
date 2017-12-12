@@ -14,7 +14,7 @@ Cannon.prototype.reset = function () {
 };
 
 Cannon.prototype.draw = function () {
-    var colorPosition = this.position.subtract(this.size.divideBy(2));
+    var colorPosition = this.position.substract(this.size.divide(2));
     Canvas2D.drawImage(sprites.cannon_barrel, this.position, this.rotation, this.origin);
     Canvas2D.drawImage(this.currentColor, colorPosition, 0, new Vector2());
 }

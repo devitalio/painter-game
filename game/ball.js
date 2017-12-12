@@ -26,7 +26,7 @@ Ball.prototype.update = function(delta) {
         }
 
         var center = new Vector2(this.currentColor.width / 2, this.currentColor.height / 2);
-        this.position = Game.gameWorld.cannon.ballPosition().substract(center);
+        this.position = Game.gameWorld.cannon.ballPosition.substract(center);
     }
 
     if (Game.gameWorld.isOutsideWorld(this.position))
