@@ -76,11 +76,11 @@ Object.defineProperty(Cannon.prototype,"color",
                 return Color.red;
             }
 
-            if (this.currentColor === srites.cannon_blue) {
+            if (this.currentColor === sprites.cannon_blue) {
                 return Color.blue;
             }
 
-            if (this.currentColor === srites.cannon_green) {
+            if (this.currentColor === sprites.cannon_green) {
                 return Color.green;
             }
         },
