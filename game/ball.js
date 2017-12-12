@@ -8,6 +8,54 @@ function Ball () {
     this.isShooting = false;
 }
 
+Object.defineProperty(Ball.prototype, "color",
+    {
+        get: function () {
+            if (this.currentColor === sprites.ball_red)
+                return Color.red;
+            else if (this.currentColor === sprites.ball_green)
+                return Color.green;
+            else
+                return Color.blue;
+        },
+        set: function (value) {
+            if (value === Color.red)
+                this.currentColor = sprites.ball_red;
+            else if (value === Color.green)
+                this.currentColor = sprites.ball_green;
+            else if (value === Color.blue)
+                this.currentColor = sprites.ball_blue;
+        }
+    });
+
+Object.defineProperty(Ball.prototype, "width",
+{
+    get: function () {
+        return this.currentColor.width;
+    }
+});
+
+Object.defineProperty(Ball.prototype, "height",
+    {
+        get: function () {
+            return this.currentColor.height;
+        }
+    });
+
+Object.defineProperty(Ball.prototype, "size",
+    {
+        get: function () {
+            return new Vector2(this.currentColor.width, this.currentColor.height);
+        }
+    });
+
+Object.defineProperty(Ball.prototype, "center",
+    {
+        get: function () {
+            return new Vector2(this.currentColor.width / 2, this.currentColor.height / 2);
+        }
+    });
+
 Ball.prototype.update = function(delta) {
     if (this.isShooting) {
 
@@ -17,16 +65,8 @@ Ball.prototype.update = function(delta) {
 
     } else {
 
-        if (Game.gameWorld.cannon.currentColor == sprites.cannon_red) {
-            this.currentColor = sprites.ball_red;
-        } else if (Game.gameWorld.cannon.currentColor == sprites.cannon_blue) {
-            this.currentColor = sprites.ball_blue;
-        } else {
-            this.currentColor = sprites.ball_green;
-        }
-
-        var center = new Vector2(this.currentColor.width / 2, this.currentColor.height / 2);
-        this.position = Game.gameWorld.cannon.ballPosition.substract(center);
+        this.color = Game.gameWorld.cannon.color;
+        this.position = Game.gameWorld.cannon.ballPosition.substract(this.center);
     }
 
     if (Game.gameWorld.isOutsideWorld(this.position))
@@ -34,7 +74,7 @@ Ball.prototype.update = function(delta) {
 };
 
 Ball.prototype.reset = function() {
-    this.position = new Vector2();
+    this.position = Vector2.zero;
     this.isShooting = false;
 };
 
@@ -43,7 +83,7 @@ Ball.prototype.draw = function () {
         return;
     }
 
-    Canvas2D.drawImage(this.currentColor, this.position, this.rotation, this.origin);
+    Canvas2D.drawImage(this.currentColor, this.position, 0, this.origin);
 }
 
 Ball.prototype.handleInput = function (delta) {

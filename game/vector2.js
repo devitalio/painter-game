@@ -104,9 +104,24 @@ Vector2.prototype.normalize = function () {
     this.divideBy(length);
 };
 
-Object.defineProperty(Vector2.prototype, "zero",
-{
-    get: function() {
-        return new Vector2();
-    }
-});
+
+Object.defineProperty(Vector2, "zero",
+    {
+        get: function () {
+            return new Vector2();
+        }
+    });
+
+Object.defineProperty(Vector2.prototype, "isZero",
+    {
+        get: function () {
+            return this.x === 0 && this.y === 0;
+        }
+    });
+
+Object.defineProperty(Vector2.prototype, "length",
+    {
+        get: function () {
+            return Math.sqrt(this.x * this.x + this.y * this.y);
+        }
+    });
