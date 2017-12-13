@@ -13,11 +13,20 @@ function PainterGameWorld ()
 };
 
 PainterGameWorld.prototype.handleInput = function (delta) {
-    this.ball.handleInput(delta);
-    this.cannon.handleInput(delta);
+
+    if (this.lives > 0) {
+        this.ball.handleInput(delta);
+        this.cannon.handleInput(delta);
+    } else {
+        if (Mouse.leftPressed) {
+            this.reset();
+        }
+    }
 };
 
 PainterGameWorld.prototype.update = function (delta) {
+
+    if (this.lives <= 0) return;
     this.ball.update(delta);
     this.cannon.update(delta);
     this.can1.update(delta);
@@ -35,9 +44,13 @@ PainterGameWorld.prototype.draw = function () {
     this.can1.draw();
     this.can2.draw();
     this.can3.draw();
+    if (this.lives <= 0) {
+        Canvas2D.drawImage(sprites.gameOver, new Vector2(Game.size.x - sprites.gameOver.width, Game.size.y - sprites.gameOver.height).divide(2),0, Vector2.zero);
+    }
 };
 
 PainterGameWorld.prototype.reset = function () {
+    this.lives = 5;
     this.ball.reset();
     this.cannon.reset();
     this.can1.reset();
