@@ -7,17 +7,17 @@ window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequ
     };
 
 function Game_Singleton() {
-    this.size = undefined,
+    this.size = null,
     this.spritesStillLoading = 0;
     this.gameWorld = undefined;
 }
 
 
 
-Game_Singleton.prototype.start = function (canvas) {
+Game_Singleton.prototype.start = function (canvas, x ,y) {
     Canvas2D.initialize(canvas);
     console.log('canvas width ' + Canvas2D.canvas.width + ' and canvas height ' + Canvas2D.canvas.height);
-    this.size = { width: Canvas2D.canvas.width, height: Canvas2D.canvas.height };
+    this.size = new Vector2(x, y);
     Keyboard.initialize();
     Mouse.initialize();
     this.loadAssets();

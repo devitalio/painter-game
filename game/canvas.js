@@ -10,6 +10,11 @@ Canvas2D.clear = function () {
 }
 
 Canvas2D.drawImage = function (sprite, position, rotation, origin) {
+
+    position = typeof position !== 'undefined' ? position : Vector2.zero;
+    rotation = typeof rotation !== 'undefined' ? rotation : 0;
+    origin = typeof origin !== 'undefined' ? origin : Vector2.zero
+
     this.canvasContext.save();
     this.canvasContext.translate(position.x, position.y);
     this.canvasContext.rotate(rotation);

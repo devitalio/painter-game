@@ -9,7 +9,7 @@ function PainterGameWorld ()
     this.can1 = new PaintCan(450, Color.red);
     this.can2 = new PaintCan(575, Color.green);
     this.can3 = new PaintCan(700, Color.blue);
-    this.lives = 5;
+    this.lives = 2;
 };
 
 PainterGameWorld.prototype.handleInput = function (delta) {
@@ -45,12 +45,12 @@ PainterGameWorld.prototype.draw = function () {
     this.can2.draw();
     this.can3.draw();
     if (this.lives <= 0) {
-        Canvas2D.drawImage(sprites.gameOver, new Vector2(Game.size.x - sprites.gameOver.width, Game.size.y - sprites.gameOver.height).divide(2),0, Vector2.zero);
+        Canvas2D.drawImage(sprites.gameOver, new Vector2(Game.size.x - sprites.gameOver.width, Game.size.y - sprites.gameOver.height).divide(2), 0, Vector2.zero);
     }
 };
 
 PainterGameWorld.prototype.reset = function () {
-    this.lives = 5;
+    this.lives = 2;
     this.ball.reset();
     this.cannon.reset();
     this.can1.reset();
@@ -59,5 +59,5 @@ PainterGameWorld.prototype.reset = function () {
 };
 
 PainterGameWorld.prototype.isOutsideWorld = function (position) {
-    return position.x < 0 || position.x > Game.size.width || position.y > Game.size.height;
+    return position.x < 0 || position.x > Game.size.x || position.y > Game.size.y;
 };
