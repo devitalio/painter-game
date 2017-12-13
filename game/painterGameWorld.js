@@ -9,7 +9,7 @@ function PainterGameWorld ()
     this.can1 = new PaintCan(450, Color.red);
     this.can2 = new PaintCan(575, Color.green);
     this.can3 = new PaintCan(700, Color.blue);
-    this.lives = 2;
+    this.lives = 5;
 };
 
 PainterGameWorld.prototype.handleInput = function (delta) {
@@ -50,7 +50,7 @@ PainterGameWorld.prototype.draw = function () {
 };
 
 PainterGameWorld.prototype.reset = function () {
-    this.lives = 2;
+    this.lives = 5;
     this.ball.reset();
     this.cannon.reset();
     this.can1.reset();
