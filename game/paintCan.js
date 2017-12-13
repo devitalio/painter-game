@@ -1,11 +1,12 @@
 "use strict";
 
-function PaintCan (xposition) {
+function PaintCan (xposition, targetColor) {
     this.position = new Vector2(xposition, -200);
     this.velocity = Vector2.zero;
     this.origin = Vector2.zero;
     this.currentColor = sprites.can_red;
     this.minVelocity = 30;
+    this.targetColor = targetColor;
     this.reset();
 };
 
@@ -75,6 +76,11 @@ PaintCan.prototype.update = function(delta) {
 
 
     if (Game.gameWorld.isOutsideWorld(this.position)) {
+        if (this.color !== this.targetColor) {
+            Game.gameWorld.lives--;
+            console.log(Game.gameWorld.lives);
+        }
+
         this.reset();
     }
 

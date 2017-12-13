@@ -6,9 +6,10 @@ function PainterGameWorld ()
 {
     this.cannon = new Cannon();
     this.ball = new Ball();
-    this.can1 = new PaintCan(450);
-    this.can2 = new PaintCan(575);
-    this.can3 = new PaintCan(700);
+    this.can1 = new PaintCan(450, Color.red);
+    this.can2 = new PaintCan(575, Color.green);
+    this.can3 = new PaintCan(700, Color.blue);
+    this.lives = 5;
 };
 
 PainterGameWorld.prototype.handleInput = function (delta) {
