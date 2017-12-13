@@ -27,7 +27,6 @@ Mouse.handelMouseDown = function (evt) {
 
 Mouse.handleMouseMove = function (evt) {
     Mouse.position = new Vector2(evt.pageX, evt.pageY);
-    console.log(Mouse.position.toString());
 };
 
 Mouse.reset = function () {

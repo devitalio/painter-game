@@ -26,7 +26,10 @@ PainterGameWorld.prototype.update = function (delta) {
 };
 
 PainterGameWorld.prototype.draw = function () {
-    Canvas2D.drawImage(sprites.background, new Vector2(), 0, new Vector2()); //probably should leave it here as background doesn't really changes
+    Canvas2D.drawImage(sprites.background, Vector2.zero, 0, Vector2.zero); //probably should leave it here as background doesn't really changes
+    for (var i = 0; i < this.lives; i++) {
+        Canvas2D.drawImage(sprites.lives, new Vector2(i * (sprites.lives.width + 5) + 15, 60), 0, Vector2.zero);
+    }
     this.ball.draw();
     this.cannon.draw();
     this.can1.draw();

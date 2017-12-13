@@ -19,5 +19,6 @@ Game.loadAssets = function () {
     sprites.can_red = loadSprite("spr_can_red.png");
     sprites.can_green = loadSprite("spr_can_green.png");
     sprites.can_blue = loadSprite("spr_can_blue.png");
+    sprites.lives = loadSprite("spr_lives.png");
 };
 
