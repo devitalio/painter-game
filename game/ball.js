@@ -1,70 +1,21 @@
 "use strict";
 
-function Ball () {
-    this.position = Vector2.zero;
-    this.velocity = Vector2.zero;
-    this.origin = Vector2.zero;
-    this.currentColor = sprites.ball_red;
+function Ball() {
+    ThreeColorGameObject.call(this, sprites.ball_red, sprites.ball_green, sprites.ball_blue); //first call superclass constructor
     this.isShooting = false;
+    this.reset();
 }
+Ball.prototype = Object.create(ThreeColorGameObject.prototype);
 
-Object.defineProperty(Ball.prototype, "color",
-    {
-        get: function () {
-            if (this.currentColor === sprites.ball_red)
-                return Color.red;
-            else if (this.currentColor === sprites.ball_green)
-                return Color.green;
-            else
-                return Color.blue;
-        },
-        set: function (value) {
-            if (value === Color.red)
-                this.currentColor = sprites.ball_red;
-            else if (value === Color.green)
-                this.currentColor = sprites.ball_green;
-            else if (value === Color.blue)
-                this.currentColor = sprites.ball_blue;
-        }
-    });
-
-Object.defineProperty(Ball.prototype, "width",
-{
-    get: function () {
-        return this.currentColor.width;
-    }
-});
-
-Object.defineProperty(Ball.prototype, "height",
-    {
-        get: function () {
-            return this.currentColor.height;
-        }
-    });
-
-Object.defineProperty(Ball.prototype, "size",
-    {
-        get: function () {
-            return new Vector2(this.currentColor.width, this.currentColor.height);
-        }
-    });
-
-Object.defineProperty(Ball.prototype, "center",
-    {
-        get: function () {
-            return new Vector2(this.currentColor.width / 2, this.currentColor.height / 2);
-        }
-    });
 
 Ball.prototype.update = function(delta) {
-    if (this.isShooting) {
+    ThreeColorGameObject.prototype.update.call(this, delta);
 
+    if (this.isShooting) {
         this.velocity.x *= 0.99;
         this.velocity.y += 6;
-        this.position.addTo(this.velocity.multiply(delta));
-
-    } else {
-
+    }
+    else {
         this.color = Game.gameWorld.cannon.color;
         this.position = Game.gameWorld.cannon.ballPosition.substract(this.center);
     }
