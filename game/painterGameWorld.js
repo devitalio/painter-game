@@ -11,6 +11,7 @@ function PainterGameWorld ()
     this.can3 = new PaintCan(700, Color.blue);
     this.lives = 5;
     this.version = "0.5";
+    this.score = 0;
 };
 
 PainterGameWorld.prototype.handleInput = function (delta) {
@@ -57,6 +58,7 @@ PainterGameWorld.prototype.reset = function () {
     this.can1.reset();
     this.can2.reset();
     this.can3.reset();
+    this.scope = 0;
 };
 
 PainterGameWorld.prototype.isOutsideWorld = function (position) {

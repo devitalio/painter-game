@@ -33,6 +33,7 @@ PaintCan.prototype.update = function (delta) {
             console.log(Game.gameWorld.lives);
         } else {
             sounds.collect_points.play();
+            Game.gameWorld.score += 10;
         }
 
         this.reset();
