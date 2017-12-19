@@ -27,5 +27,9 @@ Game.loadAssets = function () {
     sprites.can_blue = loadSprite("spr_can_blue.png");
     sprites.lives = loadSprite("spr_lives.png");
     sprites.gameOver = loadSprite("spr_gameover_click.png");
+
+    sounds.music = loadSound("snd_music", true);
+    sounds.collect_points = loadSound("snd_collect_points", false);
+    sounds.shoot_paint = loadSound("snd_shoot_paint", false);
 };
 

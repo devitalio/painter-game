@@ -37,6 +37,10 @@ Game_Singleton.prototype.loadAssets = function () { };
 
 Game_Singleton.prototype.initialize = function() {
     Game.gameWorld = new PainterGameWorld();
+
+    sounds.music.volume = 0.3;
+    sounds.music.play();
+
     console.log(Game.gameWorld.version);
 };
 

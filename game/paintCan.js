@@ -31,6 +31,8 @@ PaintCan.prototype.update = function (delta) {
         if (this.color !== this.targetColor) {
             Game.gameWorld.lives--;
             console.log(Game.gameWorld.lives);
+        } else {
+            sounds.collect_points.play();
         }
 
         this.reset();

@@ -41,7 +41,7 @@ Ball.prototype.handleInput = function (delta) {
     if (Mouse.leftPressed && !this.isShooting) {
         this.isShooting = true;
         this.velocity = Mouse.position.substract(this.position.multiply(1.3));
-
+        sounds.shoot_paint.play();
         console.log(this.velocity.toString());
     }
 };

@@ -32,7 +32,7 @@ Object.defineProperty(Sound.prototype, "volume",
         return this.snd.volume;
     },
 
-    set: function () {
+    set: function (value) {
         this.snd.volume = value;
     }
 });
