@@ -1,12 +1,18 @@
 "use strict";
 
 var sprites = {};
+var sounds = {};
 
 //override from Game.js specific to this game
 Game.loadAssets = function () {
+    var assetsDir = "./assets/";
     var loadSprite = function (sprite) {
-        return Game.loadSprite("./assets/sprites/" + sprite);
+        return Game.loadSprite(assetsDir + "sprites/" + sprite);
     };
+
+    var loadSound = function (sound, looping) {
+        return new Sound(assetsDir + "sounds/"+ sound, looping)
+    }
 
     sprites.background = loadSprite("spr_background.jpg");
     sprites.cannon_barrel = loadSprite("spr_cannon_barrel.png");
