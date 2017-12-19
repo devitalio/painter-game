@@ -10,6 +10,7 @@ function PainterGameWorld ()
     this.can2 = new PaintCan(575, Color.green);
     this.can3 = new PaintCan(700, Color.blue);
     this.lives = 5;
+    this.version = "0.5";
 };
 
 PainterGameWorld.prototype.handleInput = function (delta) {

@@ -37,6 +37,7 @@ Game_Singleton.prototype.loadAssets = function () { };
 
 Game_Singleton.prototype.initialize = function() {
     Game.gameWorld = new PainterGameWorld();
+    console.log(Game.gameWorld.version);
 };
 
 Game_Singleton.prototype.assetLoadingLoop = function () {
