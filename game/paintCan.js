@@ -1,69 +1,21 @@
 "use strict";
 
-function PaintCan (xposition, targetColor) {
+function PaintCan(xposition, targetColor) {
+    ThreeColorGameObject.call(this, sprites.can_red, sprites.can_green, sprites.can_blue); //first call superclass constructor
     this.position = new Vector2(xposition, -200);
-    this.velocity = Vector2.zero;
-    this.origin = Vector2.zero;
-    this.currentColor = sprites.can_red;
     this.minVelocity = 30;
     this.targetColor = targetColor;
     this.reset();
 };
+PaintCan.prototype = Object.create(ThreeColorGameObject.prototype);
 
-Object.defineProperty(PaintCan.prototype, "color",
-    {
-        get: function () {
-            if (this.currentColor === sprites.can_red)
-                return Color.red;
-            else if (this.currentColor === sprites.can_green)
-                return Color.green;
-            else
-                return Color.blue;
-        },
-        set: function (value) {
-            if (value === Color.red)
-                this.currentColor = sprites.can_red;
-            else if (value === Color.green)
-                this.currentColor = sprites.can_green;
-            else if (value === Color.blue)
-                this.currentColor = sprites.can_blue;
-        }
-    });
+PaintCan.prototype.update = function (delta) {
+    ThreeColorGameObject.prototype.update.call(this, delta);
 
-Object.defineProperty(PaintCan.prototype, "width",
-    {
-        get: function () {
-            return this.currentColor.width;
-        }
-    });
-
-Object.defineProperty(PaintCan.prototype, "height",
-    {
-        get: function () {
-            return this.currentColor.height;
-        }
-    });
-
-Object.defineProperty(PaintCan.prototype, "size",
-    {
-        get: function () {
-            return new Vector2(this.currentColor.width, this.currentColor.height);
-        }
-    });
-
-Object.defineProperty(PaintCan.prototype, "center",
-    {
-        get: function () {
-            return new Vector2(this.currentColor.width / 2, this.currentColor.height / 2);
-        }
-    });
-
-PaintCan.prototype.update = function(delta) {
     if (this.velocity.y === 0) {
         this.velocity = this.calculateRandomVelocity();
         this.color = this.calculateRandomColor();
     }
-    this.position.addTo(this.velocity.multiply(delta));
 
     //collision detection
     var ball = Game.gameWorld.ball;
@@ -73,7 +25,7 @@ PaintCan.prototype.update = function(delta) {
         ball.reset();
     }
 
-
+    this.rotation = Math.sin(this.position.y / 40 ) * 0.3;
 
     if (Game.gameWorld.isOutsideWorld(this.position)) {
         if (this.color !== this.targetColor) {
@@ -109,8 +61,3 @@ PaintCan.prototype.calculateRandomColor = function () {
     else
         return Color.blue;
 };
-
-PaintCan.prototype.draw = function () {
-    Canvas2D.drawImage(this.currentColor, this.position, 0, this.origin);
-}
-
