@@ -16,7 +16,6 @@ function Game_Singleton() {
 
 Game_Singleton.prototype.start = function (canvas, x ,y) {
     Canvas2D.initialize(canvas);
-    console.log('canvas width ' + Canvas2D.canvas.width + ' and canvas height ' + Canvas2D.canvas.height);
     this.size = new Vector2(x, y);
     Keyboard.initialize();
     Mouse.initialize();

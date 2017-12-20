@@ -2,22 +2,22 @@
 
 function Canvas2D_Singleton() {
     console.log("Creating Canvas2D object");
-    this.canvas = null;
-    this.canvasContext = null;
+    this._canvas = null;
+    this._canvasContext = null;
 }
 
 Canvas2D_Singleton.prototype.initialize = function (canvasName) {
-    this.canvas = document.getElementById(canvasName);
+    this._canvas = document.getElementById(canvasName);
 
-    if (this.canvas.getContext)
-        this.canvasContext = this.canvas.getContext('2d');
+    if (this._canvas.getContext)
+        this._canvasContext = this._canvas.getContext('2d');
     else {
         alert('Your browser is not HTML5 compatible.!');
     }
 };
 
 Canvas2D_Singleton.prototype.clear = function () {
-    this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this._canvasContext.clearRect(0, 0, this._canvas.width, this._canvas.height);
 };
 
 Canvas2D_Singleton.prototype.drawImage = function (sprite, position, rotation, origin, scale) {
@@ -26,14 +26,32 @@ Canvas2D_Singleton.prototype.drawImage = function (sprite, position, rotation, o
     scale = typeof scale !== 'undefined' ? scale : 1;
     origin = typeof origin !== 'undefined' ? origin : Vector2.zero;
 
-    this.canvasContext.save();
-    this.canvasContext.translate(position.x, position.y);
-    this.canvasContext.rotate(rotation);
-    this.canvasContext.drawImage(sprite, 0, 0,
+    this._canvasContext.save();
+    this._canvasContext.translate(position.x, position.y);
+    this._canvasContext.rotate(rotation);
+    this._canvasContext.drawImage(sprite, 0, 0,
         sprite.width, sprite.height,
         -origin.x * scale, -origin.y * scale,
         sprite.width, sprite.height * scale);
-    this.canvasContext.restore();
+    this._canvasContext.restore();
+};
+
+Canvas2D_Singleton.prototype.drawText = function (text, position, color, textAlign, fontname, fontsize) {
+    position = typeof position !== "undefined" ? position : Vector2.zero;
+    color = typeof position !== "undefined" ? color : Color.black;
+    textAlign = typeof textAlign !== 'undefined' ? textAlign : "top";
+    fontname = typeof fontname !== 'undefined' ? fontname : "Courier New";
+    fontsize = typeof fontsize !== 'undefined' ? fontsize : "20px";
+
+    this._canvasContext.save();
+    this._canvasContext.translate(position.x, position.y);
+    this._canvasContext.textBaseline = 'top';
+    this._canvasContext.font = fontsize + " " + fontname;
+    this._canvasContext.fillStyle = color.toString();
+    this._canvasContext.textAlign = textAlign;
+    this._canvasContext.fillText(text, 0, 0);
+    this._canvasContext.restore();
+
 };
 
 var Canvas2D = new Canvas2D_Singleton();

@@ -37,7 +37,9 @@ PainterGameWorld.prototype.update = function (delta) {
 };
 
 PainterGameWorld.prototype.draw = function () {
-    Canvas2D.drawImage(sprites.background, Vector2.zero, 0, Vector2.zero); //probably should leave it here as background doesn't really changes
+    Canvas2D.drawImage(sprites.background, Vector2.zero); //probably should leave it here as background doesn't really changes
+    Canvas2D.drawImage(sprites.scoreBoard, new Vector2(10,12));
+    Canvas2D.drawText("Score: " + this.score, new Vector2(20, 20), Color.white);
     for (var i = 0; i < this.lives; i++) {
         Canvas2D.drawImage(sprites.lives, new Vector2(i * (sprites.lives.width + 5) + 15, 60), 0, Vector2.zero);
     }
